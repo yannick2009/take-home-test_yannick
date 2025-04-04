@@ -3,13 +3,11 @@ import { Drug, Pharmacy } from "./pharmacy";
 
 import fs from "fs";
 
-const drugs = [
-  new Drug(drugTypes.DOLIPRANE, 20, 30),
-  new Drug(drugTypes.HERBAL_TEA, 10, 5),
-  new Drug(drugTypes.FERVEX, 12, 35),
-  new Drug(drugTypes.MAGIC_PILL, 15, 40),
-];
-const pharmacy = new Pharmacy(drugs);
+const pharmacy = new Pharmacy();
+pharmacy.addDrug(new Drug(drugTypes.DOLIPRANE, 20, 30));
+pharmacy.addDrug(new Drug(drugTypes.HERBAL_TEA, 10, 5));
+pharmacy.addDrug(new Drug(drugTypes.FERVEX, 12, 35));
+pharmacy.addDrug(new Drug(drugTypes.MAGIC_PILL, 15, 40));
 
 const log = [];
 

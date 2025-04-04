@@ -1,16 +1,26 @@
 import drugTypes from "./constants";
 
+// function to declare the initial benefit value and make sure that it doesn't exced 50
+const initBenefit = (num) => (num > 50 ? 50 : num);
+
+// Class to instanciate Drug
 export class Drug {
   constructor(name, expiresIn, benefit) {
     this.name = name;
     this.expiresIn = expiresIn;
-    this.benefit = benefit;
+    this.benefit = initBenefit(benefit);
   }
 }
 
+// class to instanciate pharmacy
 export class Pharmacy {
-  constructor(drugs = []) {
-    this.drugs = drugs;
+  constructor() {
+    this.drugs = [];
+  }
+  addDrug(drug) {
+    if (drug instanceof Drug) {
+      this.drugs.push(drug);
+    }
   }
   updateBenefitValue() {
     for (var i = 0; i < this.drugs.length; i++) {
