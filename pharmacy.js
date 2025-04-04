@@ -1,4 +1,4 @@
-import drugTypes from "./constants";
+import { drugTypes } from "./constants";
 
 // function to declare the initial benefit value and make sure that it doesn't exced 50
 const initBenefit = (num) => (num > 50 ? 50 : num);

@@ -1,7 +1,6 @@
-import drugTypes from "./constants";
-import { Drug, Pharmacy } from "./pharmacy";
-
 import fs from "fs";
+import { drugTypes, ERROR_MSG, OUTPUT_FILE, SUCCESS_MSG } from "./constants";
+import { Drug, Pharmacy } from "./pharmacy";
 
 const pharmacy = new Pharmacy();
 pharmacy.addDrug(new Drug(drugTypes.DOLIPRANE, 20, 30));
@@ -17,13 +16,13 @@ for (let elapsedDays = 0; elapsedDays < 30; elapsedDays++) {
 
 /* eslint-disable no-console */
 fs.writeFile(
-  "output.json",
+  OUTPUT_FILE,
   JSON.stringify({ result: log }, null, 2).concat("\n"),
   (err) => {
     if (err) {
-      console.log("error");
+      console.log(ERROR_MSG);
     } else {
-      console.log("success");
+      console.log(SUCCESS_MSG);
     }
   },
 );
