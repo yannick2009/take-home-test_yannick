@@ -15,7 +15,6 @@
         formatter = pkgs.nixpkgs-fmt;
         devShell = pkgs.mkShell {
           buildInputs = [
-            pkgs.git
             pkgs.nodejs
             pkgs.yarn
           ];
