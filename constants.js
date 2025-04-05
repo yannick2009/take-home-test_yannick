@@ -4,6 +4,7 @@ export const drugTypes = {
   HERBAL_TEA: "Herbal Tea",
   FERVEX: "Fervex",
   MAGIC_PILL: "Magic Pill",
+  DAFALGAN: "Dafalgan",
 };
 
 export const OUTPUT_FILE = "output.json"; // output file name
