@@ -10,6 +10,50 @@ export class Drug {
     this.expiresIn = expiresIn;
     this.benefit = initBenefit(benefit);
   }
+  update() {
+    switch (this.name) {
+      case drugTypes.MAGIC_PILL:
+        break;
+      case drugTypes.DAFALGAN:
+        this.benefit = Math.max(0, this.benefit - 2);
+        this.expiresIn -= 1;
+        break;
+      case drugTypes.HERBAL_TEA:
+        if (this.expiresIn <= 0) {
+          this.benefit = Math.min(50, this.benefit + 2);
+        } else {
+          this.benefit += 1;
+        }
+        this.expiresIn -= 1;
+        break;
+      case drugTypes.FERVEX:
+        if (this.expiresIn <= 0) {
+          this.benefit = 0;
+          this.expiresIn -= 1;
+          break;
+        }
+        if (this.benefit < 50) {
+          if (this.expiresIn <= 5) {
+            this.benefit = Math.min(50, this.benefit + 3);
+          } else if (this.expiresIn <= 10) {
+            this.benefit = Math.min(50, this.benefit + 2);
+          } else {
+            this.benefit = Math.min(50, this.benefit + 1);
+          }
+        }
+
+        this.expiresIn -= 1;
+        break;
+      default:
+        if (this.expiresIn <= 0) {
+          this.benefit = Math.max(0, this.benefit - 2);
+        } else {
+          this.benefit -= 1;
+        }
+        this.expiresIn -= 1;
+        break;
+    }
+  }
 }
 
 // class to instanciate pharmacy
@@ -24,51 +68,8 @@ export class Pharmacy {
   }
   updateBenefitValue() {
     for (let drug of this.drugs) {
-      switch (drug.name) {
-        case drugTypes.MAGIC_PILL:
-          break;
-        case drugTypes.DAFALGAN:
-          drug.benefit = Math.max(0, drug.benefit - 2);
-          drug.expiresIn -= 1;
-          break;
-        case drugTypes.HERBAL_TEA:
-          if (drug.expiresIn <= 0) {
-            drug.benefit = Math.min(50, drug.benefit + 2);
-          } else {
-            drug.benefit += 1;
-          }
-          drug.expiresIn -= 1;
-          break;
-        case drugTypes.FERVEX:
-          if (drug.expiresIn <= 0) {
-            drug.benefit = 0;
-            drug.expiresIn -= 1;
-            break;
-          }
-
-          if (drug.benefit < 50) {
-            if (drug.expiresIn <= 5) {
-              drug.benefit = Math.min(50, drug.benefit + 3);
-            } else if (drug.expiresIn <= 10) {
-              drug.benefit = Math.min(50, drug.benefit + 2);
-            } else {
-              drug.benefit = Math.min(50, drug.benefit + 1);
-            }
-          }
-
-          drug.expiresIn -= 1;
-          break;
-        default:
-          if (drug.expiresIn <= 0) {
-            drug.benefit = Math.max(0, drug.benefit - 2);
-          } else {
-            drug.benefit -= 1;
-          }
-          drug.expiresIn -= 1;
-          break;
-      }
+      drug.update();
     }
-
-    return this.drugs;
+    return structuredClone(this.drugs);
   }
 }
