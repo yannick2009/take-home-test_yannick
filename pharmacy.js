@@ -1,7 +1,7 @@
 import { drugTypes } from "./constants";
 
 // function to declare the initial benefit value and make sure that it doesn't exced 50
-const initBenefit = (num) => (num > 50 ? 50 : num);
+const initBenefit = (num) => (num > 50 ? 50 : num < 0 ? 0 : num);
 
 // Class to instanciate Drug
 export class Drug {

@@ -1,5 +1,14 @@
 import { Drug, Pharmacy } from "./pharmacy";
 
+describe("drug", () => {
+  it("should have 0 as min for benefit", () => {
+    expect(new Drug("test", 2, -100).benefit).toEqual(0);
+  });
+  it("should have 50 as max for benefit", () => {
+    expect(new Drug("test", 2, 100).benefit).toEqual(50);
+  });
+});
+
 describe("Pharmacy", () => {
   it("should decrease the benefit and expiresIn", () => {
     const pharmarcy = new Pharmacy();
