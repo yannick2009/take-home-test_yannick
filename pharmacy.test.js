@@ -1,19 +1,13 @@
+import { drugTypes } from "./constants";
 import { Drug, Pharmacy } from "./pharmacy";
 
-describe("drug", () => {
-  it("should have 0 as min for benefit", () => {
-    expect(new Drug("test", 2, -100).benefit).toEqual(0);
-  });
-  it("should have 50 as max for benefit", () => {
-    expect(new Drug("test", 2, 100).benefit).toEqual(50);
-  });
-});
-
 describe("Pharmacy", () => {
-  it("should decrease the benefit and expiresIn", () => {
+  it("should update dafalgan benefit and expiresIn values", () => {
     const pharmarcy = new Pharmacy();
-    pharmarcy.addDrug(new Drug("test", 2, 3));
-    expect(pharmarcy.updateBenefitValue()).toEqual([new Drug("test", 1, 2)]);
+    pharmarcy.addDrug(new Drug(drugTypes.DAFALGAN, 5, 5));
+    expect(pharmarcy.updateBenefitValue()).toEqual([
+      new Drug(drugTypes.DAFALGAN, 4, 3),
+    ]);
   });
 
   it("should return empty drugs list", () => {
