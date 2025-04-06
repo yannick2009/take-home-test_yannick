@@ -1,13 +1,20 @@
 import { drugTypes } from "./constants";
 import { Drug } from "./pharmacy";
 
-describe("Drug class instanciation", () => {
+describe("Drug class instantiation", () => {
   it("should have 0 as min for benefit", () => {
     expect(new Drug("test", 2, -100).benefit).toEqual(0);
   });
 
   it("should have 50 as max for benefit", () => {
     expect(new Drug("test", 2, 100).benefit).toEqual(50);
+  });
+
+  it("should instanciate even whith bad values", () => {
+    expect(new Drug("test", 2, null).benefit).toEqual(0);
+    expect(new Drug("test", undefined, 10).expiresIn).toEqual(0);
+    expect(new Drug("test", "", "100").benefit).toEqual(0);
+    expect(new Drug("test", "", "100").expiresIn).toEqual(0);
   });
 });
 

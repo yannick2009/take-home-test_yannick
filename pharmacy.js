@@ -1,13 +1,17 @@
 import { drugTypes } from "./constants";
 
-// function to declare the initial benefit value and make sure that it doesn't exced 50
-const initBenefit = (num) => (num > 50 ? 50 : num < 0 ? 0 : num);
+// function to declare the initial benefit value, make sure that it doesn't exced 50 and it's type of number
+const initBenefit = (num) =>
+  typeof num !== "number" ? 0 : num > 50 ? 50 : num < 0 ? 0 : num;
+
+// function to declare the initial expireIn value and make sure that is type of number
+const initExpireIn = (num) => (typeof num !== "number" ? 0 : num);
 
 // Class to instanciate Drug
 export class Drug {
   constructor(name, expiresIn, benefit) {
     this.name = name;
-    this.expiresIn = expiresIn;
+    this.expiresIn = initExpireIn(expiresIn);
     this.benefit = initBenefit(benefit);
   }
   update() {
