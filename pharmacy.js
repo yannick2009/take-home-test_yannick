@@ -19,11 +19,10 @@ export class Drug {
         this.expiresIn -= 1;
         break;
       case drugTypes.HERBAL_TEA:
-        if (this.expiresIn <= 0) {
-          this.benefit = Math.min(50, this.benefit + 2);
-        } else {
-          this.benefit += 1;
-        }
+        this.benefit =
+          this.expiresIn <= 0
+            ? Math.min(50, this.benefit + 2)
+            : (this.benefit += 1);
         this.expiresIn -= 1;
         break;
       case drugTypes.FERVEX:
@@ -32,24 +31,22 @@ export class Drug {
           this.expiresIn -= 1;
           break;
         }
-        if (this.benefit < 50) {
-          if (this.expiresIn <= 5) {
-            this.benefit = Math.min(50, this.benefit + 3);
-          } else if (this.expiresIn <= 10) {
-            this.benefit = Math.min(50, this.benefit + 2);
-          } else {
-            this.benefit = Math.min(50, this.benefit + 1);
-          }
-        }
 
+        if (this.benefit < 50) {
+          this.benefit =
+            this.expiresIn <= 5
+              ? Math.min(50, this.benefit + 3)
+              : this.expiresIn <= 10
+                ? Math.min(50, this.benefit + 2)
+                : Math.min(50, this.benefit + 1);
+        }
         this.expiresIn -= 1;
         break;
       default:
-        if (this.expiresIn <= 0) {
-          this.benefit = Math.max(0, this.benefit - 2);
-        } else {
-          this.benefit -= 1;
-        }
+        this.benefit =
+          this.expiresIn <= 0
+            ? Math.max(0, this.benefit - 2)
+            : this.benefit - 1;
         this.expiresIn -= 1;
         break;
     }
